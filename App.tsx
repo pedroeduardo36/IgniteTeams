@@ -1,8 +1,7 @@
-import { Groups } from "@screens/Groups";
-import { NewGroup } from "@screens/NewGroup";
+import { Groups, NewGroup, Players } from "@screens/index";
 import { ThemeProvider } from "styled-components/native";
 import theme from "@theme/index";
-import { ActivityIndicator, StatusBar } from "react-native";
+import { StatusBar } from "react-native";
 import {
   useFonts,
   Roboto_400Regular,
@@ -15,7 +14,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      {fontsLoaded ? <NewGroup /> : <Loading />}
+      {fontsLoaded ? <Players /> : <Loading />}
       <StatusBar barStyle="light-content" />
     </ThemeProvider>
   );
