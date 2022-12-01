@@ -6,12 +6,13 @@ import {
   ButtonIcon,
   Input,
   Filter,
+  PlayerCard,
 } from "@components/index";
 import { Container, Form, HeaderList, NumbersOfPlayers } from "./styles";
 
 export function Players() {
   const [team, setTeam] = useState("Time 1");
-  const [players, setPlayers] = useState(['Pedro', 'Guigo', 'Nat']);
+  const [players, setPlayers] = useState(["Pedro", "Guigo", "Nat"]);
 
   return (
     <Container>
@@ -40,6 +41,14 @@ export function Players() {
         />
         <NumbersOfPlayers>{players.length}</NumbersOfPlayers>
       </HeaderList>
+
+      <FlatList
+        data={players}
+        keyExtractor={(item) => item}
+        renderItem={({ item }) => (
+          <PlayerCard name={item} onRemove={() => {}} />
+        )}
+      />
     </Container>
   );
 }
