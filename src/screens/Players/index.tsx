@@ -7,6 +7,8 @@ import {
   Input,
   Filter,
   PlayerCard,
+  ListEmpty,
+  Button,
 } from "@components/index";
 import { Container, Form, HeaderList, NumbersOfPlayers } from "./styles";
 
@@ -48,7 +50,16 @@ export function Players() {
         renderItem={({ item }) => (
           <PlayerCard name={item} onRemove={() => {}} />
         )}
+        ListEmptyComponent={() => (
+          <ListEmpty message="Sua lista de turmas está vazia." />
+        )}
+        contentContainerStyle={[
+          { paddingBottom: 100 },
+          players.length === 0 && { flex: 1 },
+        ]}
       />
+
+      <Button title="Remover turma" type="SECONDARY" style={{marginBottom: 18}}/>
     </Container>
   );
 }
