@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FlatList } from "react-native";
-
+import { useNavigation } from "@react-navigation/native";
 import {
   Header,
   Highlight,
@@ -13,7 +13,13 @@ import { Container } from "./styles";
 export function Groups() {
   const [groups, setGroups] = useState<string[]>(["RODRIGO"]);
 
-  return (
+  const navigation = useNavigation()
+
+  function handleNewGroup(){
+    navigation.navigate('new')
+  }
+
+  return ( 
     <Container>
       <Header />
       <Highlight title="Turma" subtitle="Jogue com sua turma" />
@@ -27,7 +33,7 @@ export function Groups() {
           <ListEmpty message="Sua lista de turmas está vazia." />
         )}
       />
-      <Button title="Criar nova turma" />
+      <Button title="Criar nova turma" onPress={handleNewGroup} />
     </Container>
   );
 }

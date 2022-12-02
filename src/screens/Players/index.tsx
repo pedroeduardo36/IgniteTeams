@@ -11,18 +11,23 @@ import {
   Button,
 } from "@components/index";
 import { Container, Form, HeaderList, NumbersOfPlayers } from "./styles";
+import { useRoute } from "@react-navigation/native";
+
+type RouteParams = {
+  group: string;
+};
 
 export function Players() {
   const [team, setTeam] = useState("Time 1");
   const [players, setPlayers] = useState(["Pedro", "Guigo", "Nat"]);
 
+  const route = useRoute();
+  const { group } = route.params as RouteParams;
+
   return (
     <Container>
       <Header showBackButton />
-      <Highlight
-        title="Nome da turma"
-        subtitle="Adicione a galera e separe os times"
-      />
+      <Highlight title={group} subtitle="Adicione a galera e separe os times" />
       <Form>
         <Input placeholder="Nome do participante" autoCorrect={false} />
         <ButtonIcon icon="check" />
@@ -59,7 +64,11 @@ export function Players() {
         ]}
       />
 
-      <Button title="Remover turma" type="SECONDARY" style={{marginBottom: 18}}/>
+      <Button
+        title="Remover turma"
+        type="SECONDARY"
+        style={{ marginBottom: 18 }}
+      />
     </Container>
   );
 }
