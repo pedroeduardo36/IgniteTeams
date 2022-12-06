@@ -11,7 +11,7 @@ import {
 import { Container } from "./styles";
 
 export function Groups() {
-  const [groups, setGroups] = useState<string[]>(["RODRIGO"]);
+  const [groups, setGroups] = useState<string[]>([]);
 
   const navigation = useNavigation()
 
