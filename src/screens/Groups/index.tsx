@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { FlatList } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import {
   Header,
   Highlight,
@@ -9,17 +9,33 @@ import {
   Button,
 } from "@components/index";
 import { Container } from "./styles";
+import { groupsGetAll } from "@storage/group/groupsGetAll";
 
 export function Groups() {
   const [groups, setGroups] = useState<string[]>([]);
 
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
-  function handleNewGroup(){
-    navigation.navigate('new')
+  function handleNewGroup() {
+    navigation.navigate("new");
   }
 
-  return ( 
+  async function fetchGroups() {
+    try {
+      const data = await groupsGetAll();
+      setGroups(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchGroups();
+    }, [])
+  );
+
+  return (
     <Container>
       <Header />
       <Highlight title="Turma" subtitle="Jogue com sua turma" />
