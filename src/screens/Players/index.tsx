@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Alert, FlatList } from "react-native";
+import { Alert, FlatList, Keyboard } from "react-native";
 import {
   Header,
   Highlight,
@@ -45,7 +45,10 @@ export function Players() {
 
     try {
       await playerAddByGroup(newPlayer, group);
+
+      setNewPlayerName("");
       fetchPlayersByTeam();
+      Keyboard.dismiss();
     } catch (error) {
       if (error instanceof AppError) {
         Alert.alert("Nova pessoa", error.message);
@@ -79,6 +82,9 @@ export function Players() {
           onChangeText={setNewPlayerName}
           placeholder="Nome do participante"
           autoCorrect={false}
+          value={newPlayerName}
+          onSubmitEditing={handleAddPlayer}
+          returnKeyType="send"
         />
         <ButtonIcon onPress={handleAddPlayer} icon="add" />
       </Form>
